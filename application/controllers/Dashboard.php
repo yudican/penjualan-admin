@@ -11,9 +11,4 @@ class Dashboard extends MY_Controller {
 		];
 		$this->load->view('layout',$data);
 	}
-
-	public function cek()
-	{
-		echo file_get_contents(APPPATH.'/views/auth/login.php',TRUE);
-	}
 }

@@ -52,3 +52,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'dashboard';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = TRUE;
+
+$route['product/add-promo/(:num)'] = 'promo/index/$1';
+$route['product/add-promo/save/(:num)'] = 'promo/save/$1';
