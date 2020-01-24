@@ -22,16 +22,65 @@ if ( ! function_exists('getUser'))
 }
 if ( ! function_exists('input_text'))
 {
-    function input_text($name)
+    function input_text($name,$row_name=null)
     {
       $form = "";
       $form .= "<div class=\"form-group row mb-4\">
                   <label for=\"".$name."\" class=\"col-form-label text-md-right col-12 col-md-3 col-lg-3\">".ucfirst(str_replace('_',' ', $name))."</label>
                   <div class=\"col-sm-12 col-md-7\"> 
-                    <input id=\"".$name."\" type=\"text\" class=\"form-control <?php echo form_error('".$name."') ? 'invalid' : '' ?>\" placeholder=\"Buat ".ucfirst(str_replace('_', ' ', $name))."\" value=\"".set_value($name)."\" name=\"".$name."\">
-                    <?php echo error(form_error('".$name."')) ?>
+                    <input id=\"".$name."\" type=\"text\" class=\"form-control\" ".error_border(form_error($name))." placeholder=\"Buat ".ucfirst(str_replace('_', ' ', $name))."\" value=\"".set_value($name,$row_name)."\" name=\"".$name."\">
+                    ".error(form_error($name))."
                   </div>
                 </div>"; 
       return $form;
+    }   
+}
+if ( ! function_exists('input_textarea'))
+{
+    function input_textarea($name,$row_name=null)
+    {
+      $form = "";
+      $form .= "<div class=\"form-group row mb-4\">
+                  <label for=\"".$name."\" class=\"col-form-label text-md-right col-12 col-md-3 col-lg-3\">".ucfirst(str_replace('_',' ', $name))."</label>
+                  <div class=\"col-sm-12 col-md-7\"> 
+                    <textarea name=\"".$name."\" row=\"10\" placeholder=\"Buat ".ucfirst(str_replace('_', ' ', $name))."\" class=\"form-control\" ".error_border(form_error($name)).">".set_value($name,$row_name)."</textarea>
+                    ".error(form_error($name))."
+                  </div>
+                </div>"; 
+      return $form;
+    }   
+}
+if ( ! function_exists('input_select'))
+{
+    function input_select($name,$row_name=null,$table,$primary,$value)
+    {
+      $CI =& get_instance();
+      $lists = $CI->db->get($table)->result_array();
+      $form = "";
+      $form .= "<div class=\"form-group row mb-4\">
+                  <label for=\"".$name."\" class=\"col-form-label text-md-right col-12 col-md-3 col-lg-3\">".ucfirst(str_replace('_',' ', $name))."</label>
+                  <div class=\"col-sm-12 col-md-7\"> 
+                    <select name=\"".$name."\" id=\"".$name."\" ".error_border(form_error($name))." class=\"form-control\">
+                      <option value=\"\">Pilih ".ucfirst(str_replace('_',' ', $name))."</option>";
+                      foreach ($lists as $list) {
+                  $form .= "<option value=\"".$list[$primary]."\" ".set_select($name,$row_name,($list[$primary] == $row_name)).">".$list[$value]."</option>";
+                        }
+                        $form .=  "</select>
+                    ".error(form_error($name))."
+                  </div>
+                </div>"; 
+      return $form;
+    }   
+}
+
+if ( ! function_exists('value'))
+{
+    function value($name)
+    {
+      $value = '';
+      if (isset($name)) {
+        $value = $name;
+      }
+      return $value;
     }   
 }

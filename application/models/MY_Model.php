@@ -24,7 +24,7 @@ class MY_model extends CI_Model {
     return $this->db->affected_rows();
   }
   
-  public function update($table, $colId, $data, $id)
+  public function update_data($table, $colId, $data, $id)
 	{
     $this->table = $table;
     $this->id = $colId;
@@ -32,7 +32,7 @@ class MY_model extends CI_Model {
     return $this->db->affected_rows();
   }
   
-  public function delete($table, $colId, $id)
+  public function delete_data($table, $colId, $id)
 	{
     $this->table = $table;
     $this->id = $colId;

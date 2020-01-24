@@ -84,7 +84,7 @@
         $.ajax({
           type: 'ajax',
           method: 'post',
-          url: '<?php echo site_url('product/delete/') ?>'+id,
+          url: '<?php echo site_url('product/delete_data/') ?>'+id,
           dataType: 'JSON',
           success: function(data) {
             var table = $('#tableList').DataTable(); 
