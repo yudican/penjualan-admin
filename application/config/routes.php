@@ -53,5 +53,10 @@ $route['default_controller'] = 'dashboard';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = TRUE;
 
-$route['product/add-promo/(:num)'] = 'promo/index/$1';
+$route['product/add-promo/(:num)'] = 'promo/form_save/$1';
 $route['product/add-promo/save/(:num)'] = 'promo/save/$1';
+
+$route['product/add'] = 'product/form';
+$route['product/edit/(:num)'] = 'product/form/$1';
+
+$route['product/variant/(:num)'] = 'product_variant/index';

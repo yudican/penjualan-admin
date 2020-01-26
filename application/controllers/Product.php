@@ -2,13 +2,12 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Product extends MY_Controller {
-  protected $table = 'barang';
-  protected $id = 'barang_id';
 
   public function __construct()
   {
     parent::__construct();
-    
+    $this->table = 'barang';
+    $this->colId = 'barang_id';
   }
   
 
@@ -20,56 +19,32 @@ class Product extends MY_Controller {
 		];
 		$this->load->view('layout',$data);
 	}
-
+  /**
+   * $column = daftar nama kolom yang akan di tampilkan
+   * $this->colId = kolom primary key
+   * $this->table = nama tabel
+   * product = adalah nama controller 
+   */
   public function list()
   {
     $column = 'barang_id,barang_nama,barang_kategori,barang_sku,barang_stock,barang_detail';
-    echo $this->datatable($column,'barang_id',$this->table,'product');
+    echo $this->datatable($column,$this->colId,$this->table,'product'); //  
   }
 
-  public function add()
-  {
-    $this->_rules();
-    
-    if ($this->form_validation->run() == false) {
-      $data = [
-        'title' => 'Product List',
-        'isi' 	=> 'dashboard/product-form',
-        'action' => site_url('product/add')
-      ];
-      $this->load->view('layout',$data);
-    } else {
-      $data = [
-        'barang_nama' => $this->input('barang_nama'),
-        'barang_kategori' => $this->input('barang_kategori'),
-        'barang_sku' => $this->input('barang_sku'),
-        'barang_stock' => $this->input('barang_stock'),
-        'barang_type' => $this->input('barang_type'),
-        'barang_hrg_beli' => $this->input('barang_hrg_beli'),
-        'barang_hrg_jual' => $this->input('barang_hrg_jual'),
-        'barang_detail' => $this->input('barang_detail'),
-      ];
-
-      if($this->insert($this->table,$data)){
-        $this->session->set_flashdata('success', 'Produk Berhasil Di input');
-        redirect(site_url('product/add-promo/'.$this->input('barang_sku')));
-      }else{
-        $this->session->set_flashdata('error', 'Produk Gagal Di input');
-        redirect(site_url('product/add'));
-      }
-    }
-  }
-  public function edit()
+  public function form()
   {
     $this->_rules();
     $id = $this->uri->segment(3);
+    $type = !$id ? 'add' : 'edit';
     if ($this->form_validation->run() == false) {
       $data = [
         'title' => 'Product List',
         'isi' 	=> 'dashboard/product-form',
-        'action' => site_url('product/edit/'.$id),
-        'row' => $this->get($this->table,'barang_id',$id)->row_array()
+        'action' => site_url('product/'.$type)
       ];
+      if($id){
+        $data['row'] = $this->get($this->table,$this->colId,$id)->row_array();
+      }
       $this->load->view('layout',$data);
     } else {
       $data = [
@@ -82,13 +57,13 @@ class Product extends MY_Controller {
         'barang_hrg_jual' => $this->input('barang_hrg_jual'),
         'barang_detail' => $this->input('barang_detail'),
       ];
-
-      if($this->update($this->table,'barang_id',$data,$id)){
-        $this->session->set_flashdata('success', 'Produk Berhasil Di Update');
-        redirect(site_url('product'));
+      $insert_or_update = !$id ? $this->insert($this->table,$data,true) : $this->update($this->table,$this->colId,$data,$id);
+      if($insert_or_update){
+        $this->session->set_flashdata('success', 'Produk Berhasil Di '.$type);
+        !$id ? redirect(site_url('product/add-promo/'.$insert_or_update)) : redirect(site_url('product'));
       }else{
-        $this->session->set_flashdata('error', 'Produk Gagal Di Update');
-        redirect(site_url('product'));
+        $this->session->set_flashdata('error', 'Produk Gagal Di '.$type);
+        redirect(site_url('product/add'));
       }
     }
   }
@@ -97,7 +72,7 @@ class Product extends MY_Controller {
   {
     $id = $this->uri->segment(3);
     $status = false;
-    if($this->delete($this->table,'barang_id',$id)){
+    if($this->delete($this->table,$this->colId,$id)){
       $this->session->set_flashdata('success', 'Produk Berhasil Di Hapus');
       $status = true;
     }else{

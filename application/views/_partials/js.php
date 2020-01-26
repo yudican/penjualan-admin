@@ -14,7 +14,8 @@
   <script src="<?php echo base_url(); ?>assets/modules/sweetalert/sweetalert.min.js"></script>
 
 
-  
+  <script src="<?php echo base_url(); ?>assets/js/script.js"></script>
+  <script src="<?php echo base_url(); ?>assets/js/scripts.js"></script>
   <script src="<?php echo base_url(); ?>assets/js/custom.js"></script>
   <script>
     function hanyaAngka(e, decimal) {

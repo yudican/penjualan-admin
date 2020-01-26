@@ -2,7 +2,9 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class MY_Controller extends CI_Controller {
-  
+  protected $table;
+  protected $colId;
+  protected $id;
   public function __construct()
   {
     parent::__construct();
@@ -35,7 +37,7 @@ class MY_Controller extends CI_Controller {
     return $this->MY_Model->get($table, $where, $id);
   }
 
-  public function insert($table, $data)
+  public function insert($table, $data, $status=false)
   {
     return $this->MY_Model->insert($table, $data);
   }

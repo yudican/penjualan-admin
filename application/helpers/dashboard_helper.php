@@ -22,16 +22,40 @@ if ( ! function_exists('getUser'))
 }
 if ( ! function_exists('input_text'))
 {
-    function input_text($name,$row_name=null)
+    function input_text($name,$row_name=null,$type='text')
     {
       $form = "";
       $form .= "<div class=\"form-group row mb-4\">
                   <label for=\"".$name."\" class=\"col-form-label text-md-right col-12 col-md-3 col-lg-3\">".ucfirst(str_replace('_',' ', $name))."</label>
                   <div class=\"col-sm-12 col-md-7\"> 
-                    <input id=\"".$name."\" type=\"text\" class=\"form-control\" ".error_border(form_error($name))." placeholder=\"Buat ".ucfirst(str_replace('_', ' ', $name))."\" value=\"".set_value($name,$row_name)."\" name=\"".$name."\">
+                    <input id=\"".$name."\" type=\"".$type."\" class=\"form-control\" ".error_border(form_error($name))." placeholder=\"Buat ".ucfirst(str_replace('_', ' ', $name))."\" value=\"".set_value($name,$row_name)."\" name=\"".$name."\">
                     ".error(form_error($name))."
                   </div>
                 </div>"; 
+      return $form;
+    }   
+}
+if ( ! function_exists('input_date'))
+{
+    function input_date($name,$row_name=null,$type='date')
+    {
+      $form = "";
+      $form .= "<div class=\"form-group row mb-4\">
+                  <label for=\"".$name."\" class=\"col-form-label text-md-right col-12 col-md-3 col-lg-3\">".ucfirst(str_replace('_',' ', $name))."</label>
+                  <div class=\"col-sm-12 col-md-7\"> 
+                    <input id=\"".$name."\" type=\"".$type."\" class=\"form-control\" ".error_border(form_error($name))." placeholder=\"Buat ".ucfirst(str_replace('_', ' ', $name))."\" value=\"".set_value($name,$row_name)."\" name=\"".$name."\">
+                    ".error(form_error($name))."
+                  </div>
+                </div>"; 
+      return $form;
+    }   
+}
+if ( ! function_exists('input_hidden'))
+{
+    function input_hidden($name,$value)
+    {
+      $form = "";
+      $form .= "<input type=\"hidden\" name=\"".$name."\" value=\"".$value."\" >"; 
       return $form;
     }   
 }

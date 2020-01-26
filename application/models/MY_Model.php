@@ -17,11 +17,11 @@ class MY_model extends CI_Model {
     }
 	}
 
-  public function insert($table, $data)
+  public function insert($table, $data, $insertId=false)
 	{
     $this->table = $table;
     $this->db->insert($this->table, $data);
-    return $this->db->affected_rows();
+    return $insertId ? $this->db->insert_id() : $this->db->affected_rows();
   }
   
   public function update_data($table, $colId, $data, $id)

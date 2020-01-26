@@ -1,5 +1,6 @@
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+  <meta name="base-url" content="<?php echo base_url(); ?>">
   <title><?php echo isset($title) ? $title : 'Dashboard' ?></title>
   <link rel="shortcut icon" href="<?php echo site_url('upload/web/') ?>">
   <!-- General CSS Files -->
