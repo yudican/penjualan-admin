@@ -11,7 +11,7 @@
         <thead>
           <tr>
             <th scope="col">#</th>
-            <th scope="col">SKU</th>
+            <th scope="col">Barcode</th>
             <th scope="col">Nama Produk</th>
             <th scope="col">Kategori</th>
             <th scope="col">Stok</th>
@@ -40,7 +40,7 @@
             },
            "columns": [
                { "data": "nomor",orderable:false,searchable:false },
-               { "data": "barang_sku", "name": "barang.barang_sku" },
+               { "data": "barang_barcode", "name": "barang.barang_barcode" },
                { "data": "barang_nama", "name": "barang.barang_nama" },
                { "data": "barang_kategori", "name": "barang.barang_kategori" },
                { "data": "barang_stock", "name": "barang.barang_stock" },

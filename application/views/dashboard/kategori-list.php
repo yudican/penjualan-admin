@@ -12,7 +12,6 @@
           <tr>
             <th scope="col">#</th>
             <th scope="col">Kategori Nama</th>
-            <th scope="col">Kategori Jenis</th>
             <th scope="col">Opsi</th>
           </tr>
         </thead>
@@ -38,7 +37,6 @@
            "columns": [
                { "data": "nomor",orderable:false,searchable:false },
                { "data": "kategori_nama", "name": "kategori.kategori_nama" },
-               { "data": "kategori_jenis", "name": "kategori.kategori_jenis" },
                { "data": "actions",orderable:false,searchable:false}
                
                

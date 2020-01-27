@@ -7,7 +7,7 @@
   <script src="<?php echo base_url(); ?>assets/modules/moment.min.js"></script>
   <script src="<?php echo base_url(); ?>assets/js/stisla.js"></script>
   <script src="<?php echo base_url(); ?>assets/modules/izitoast/js/iziToast.min.js"></script>
-
+  <script src="<?php echo base_url(); ?>assets/modules/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
   <!-- Page Specific JS File -->
   <script src="<?php echo base_url(); ?>assets/js/jquery.dataTables.min.js"></script>
   <script src="<?php echo base_url(); ?>assets/js/dataTables.bootstrap4.js"></script>
@@ -17,6 +17,10 @@
   <script src="<?php echo base_url(); ?>assets/js/script.js"></script>
   <script src="<?php echo base_url(); ?>assets/js/scripts.js"></script>
   <script src="<?php echo base_url(); ?>assets/js/custom.js"></script>
+
+  <script>
+    $(".inputtags").tagsinput('items');
+  </script>
   <script>
     function hanyaAngka(e, decimal) {
     var key;

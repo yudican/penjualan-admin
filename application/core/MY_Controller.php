@@ -39,7 +39,7 @@ class MY_Controller extends CI_Controller {
 
   public function insert($table, $data, $status=false)
   {
-    return $this->MY_Model->insert($table, $data);
+    return $this->MY_Model->insert($table, $data, $status);
   }
 
   public function update($table, $where, $data, $id)

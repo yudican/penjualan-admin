@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/modules/izitoast/css/iziToast.min.css">
   <link rel="stylesheet" href="<?php echo base_url() ?>assets/css/dataTables.bootstrap4.css">
   <link href="<?php echo base_url() ?>assets/css/jquery.dataTables.min.css" rel="stylesheet">
-
+  <link rel="stylesheet" href="<?php echo base_url() ?>assets/modules/bootstrap-tagsinput/dist/bootstrap-tagsinput.css">
   <script src="<?php echo base_url() ?>assets/js/jquery-3.3.1.min.js"></script>
   <!-- <script src="<?php echo base_url() ?>assets/js/script.js"></script> -->
   <style>

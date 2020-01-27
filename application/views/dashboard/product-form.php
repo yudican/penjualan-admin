@@ -7,9 +7,24 @@
       <div class="card">
         <div class="card-body">
           <?php echo form_open($action) ?>
-            <?php echo input_text('barang_sku', isset($row['barang_sku']) ? $row['barang_sku'] : ''); ?>
+            <div id="kategori">
+              <div class="form-group row mb-4">
+                <label for="barang_kategori" class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Kategori Produk</label>
+                <div class="col-sm-12 col-md-7"> 
+                  <select name="barang_kategori[]" onchange="selectCategory();" id="barang_kategori" <?php echo error_border(form_error('barang_kategori')) ?> class="form-control">
+                    <option value="">Pilih Kategori</option>";
+                    <?php foreach ($kategori as $list) {
+                      echo "<option value=".$list['kategori_id']." ".set_select('barang_kategori',isset($row['barang_kategori']) ? $row['barang_kategori'] : '',($list['kategori_id'] == isset($row['barang_barcode']) ? $row['barang_barcode'] : '')).">".$list['kategori_nama']."</option>";
+                    } ?>
+                  </select>
+                  <?php echo error(form_error('barang_kategori')) ?>
+                </div>
+              </div>
+            </div>
+
+
+            <?php echo input_text('barang_barcode', isset($row['barang_barcode']) ? $row['barang_barcode'] : ''); ?>
             <?php echo input_text('barang_nama', isset($row['barang_nama']) ? $row['barang_nama'] : ''); ?>
-            <?php echo input_select('barang_kategori', isset($row['barang_kategori']) ? $row['barang_kategori'] : '', 'kategori','kategori_id','kategori_nama'); ?>
             <?php echo input_text('barang_stock', isset($row['barang_stock']) ? $row['barang_stock'] : ''); ?>
             <?php echo input_text('barang_type', isset($row['barang_type']) ? $row['barang_type'] : ''); ?>
             <?php echo input_text('barang_hrg_beli', isset($row['barang_hrg_beli']) ? $row['barang_hrg_beli'] : ''); ?>

@@ -2,28 +2,31 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Kategori extends MY_Controller {
-  protected $table = 'kategori';
-  protected $id = 'kategori_id';
-
   public function __construct()
   {
     parent::__construct();
-    
+    $this->table = 'kategori';
+    $this->id = 'kategori_id';
   }
   
 
 	public function index()
 	{
+    $id = $this->uri->segment(3);
 		$data = [
 			'title' => 'Kategori List',
-			'isi' 	=> 'dashboard/kategori-list'
-		];
+      'isi' 	=> 'dashboard/kategori-list',
+      'kategori' => $this->get($this->table,$this->id)->result_array()
+    ];
+    if($id){
+      $data['row'] = $this->get($this->table,$this->colId,$id)->row_array();
+    }
 		$this->load->view('layout',$data);
 	}
 
   public function list()
   {
-    $column = 'kategori_id,kategori_nama,kategori_jenis';
+    $column = 'kategori_id,kategori_nama';
     echo $this->datatable($column,'kategori_id',$this->table,'kategori');
   }
 
@@ -98,7 +101,6 @@ class Kategori extends MY_Controller {
   public function _rules()
   {
     $this->form_validation->set_rules('kategori_nama', 'Nama Kategori', 'trim|required');
-    $this->form_validation->set_rules('kategori_jenis', 'Jenis Kategori', 'trim|required');
   }
 	
 }

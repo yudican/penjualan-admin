@@ -60,3 +60,4 @@ $route['product/add'] = 'product/form';
 $route['product/edit/(:num)'] = 'product/form/$1';
 
 $route['product/variant/(:num)'] = 'product_variant/index';
+$route['product/image/(:num)'] = 'product_image/index';
