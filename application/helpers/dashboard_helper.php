@@ -166,10 +166,10 @@ if ( ! function_exists('getCategoryTree'))
         $lev =  strlen($prefix) == 0 ? 'sub' : 'super sub';
         $action = strlen($prefix) == 0 ? 'onchange="selectSubCategory();" id="barang_subkategori"' : 'id="barang_kategori"';
         $kategori = $CI->db->get_where('kategori', ['kategori_jenis' => $row->kategori_jenis])->result_array();
-            $category .= "<div class=\"form-group row mb-4\" id=\"".str_replace(' ','-',$lev)."\">
+            $category .= "<div class=\"form-group row mb-4\" id=\"data_kategori-".$row->kategori_jenis."\">
                             <label for=\"barang_kategori\" class=\"col-form-label text-md-right col-12 col-md-3 col-lg-3\"> ".$lev." Kategori</label>
                             <div class=\"col-sm-12 col-md-7\"> 
-                              <select name=\"barang_kategori[]\" ".$action." class=\"form-control\">
+                              <select name=\"barang_kategori[]\" onchange=\"selectCategory(".$row->kategori_jenis.");\" id=\"barang_kategori-".$row->kategori_jenis."\" class=\"form-control\">
                                 <option value=\"\">Pilih Kategori </option>";
                                 foreach ($kategori as $list) {
                                   $category .= "<option value=\"".$list['kategori_id']."\" ".set_select('barang_kategori',isset($row->kategori_id) ? $row->kategori_id : '',$list['kategori_id'] == $row->kategori_id).">".$list['kategori_nama']."</option>";

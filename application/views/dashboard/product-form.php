@@ -8,10 +8,10 @@
         <div class="card-body">
           <?php echo form_open($action) ?>
             <div id="kategori">
-              <div class="form-group row mb-4">
+              <div class="form-group row mb-4" id="data_kategori-0">
                 <label for="barang_kategori" class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Kategori Produk</label>
                 <div class="col-sm-12 col-md-7"> 
-                  <select name="barang_kategori[]" onchange="selectCategory();" id="barang_kategori" <?php echo error_border(form_error('barang_kategori')) ?> class="form-control select2">
+                  <select name="barang_kategori[]" onchange="selectCategory(0);" id="barang_kategori-0" <?php echo error_border(form_error('barang_kategori')) ?> class="form-control select2">
                     <option value="">Pilih Kategori</option>";
                     <?php foreach ($kategori as $list) {
                       echo "<option value=".$list['kategori_id']." ".set_select('barang_kategori',isset($row['barang_kategori']) ? $row['barang_kategori'] : '',$list['kategori_id'] == $row['barang_kategori']).">".$list['kategori_nama']."</option>";

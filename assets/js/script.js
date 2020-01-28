@@ -179,8 +179,8 @@ $(function() {
 });
 
 
-function selectCategory(){
-  var val = $('#barang_kategori').val();
+function selectCategory(dataV){
+  var val = $('#barang_kategori-'+dataV).val();
   $.ajax({
     url:base_url+'product/get-category/'+val,
     method: "POST",
@@ -190,21 +190,14 @@ function selectCategory(){
     success(response) {
       var html = ``
       var data = ``
-      var length = 0;
-      for (var prop in response) {
-        var res = response[prop];
-        length = response[prop].length;
-        for(var i=0; i < res.length; i++){
-          var row = res[i]
-          if(row != undefined){
-            data += `<option value="`+row.kategori_id+`">`+row.kategori_nama+`</option>`
-          }
-        }
+      for (let i = 0; i < response.data.length; i++) {
+        data += `<option value="`+response.data[i].kategori_id+`">`+response.data[i].kategori_nama+`</option>`
+        console.log(response.data)
       }
-        html += `<div class="form-group row mb-4" id="sub_kategori">
+        html += `<div class="form-group row mb-4" id="data_kategori-`+val+`">
                 <label for="barang_kategori" class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Sub Kategori Produk</label>
                 <div class="col-sm-12 col-md-7"> 
-                  <select name="barang_kategori[]" onchange="selectSubCategory();" id="barang_subkategori" class="form-control">
+                  <select name="barang_kategori[]" onchange="selectCategory(`+val+`);" id="barang_kategori-`+val+`" class="form-control select2">
                     <option value="">Pilih Sub Kategori</option>
                     `+
                     data
@@ -213,74 +206,13 @@ function selectCategory(){
                   <?php echo error(form_error('barang_kategori')) ?>
                 </div>
               </div>`
-      
 
-      
-      if(length > 0){
-        $('#sub').remove();
-        $('#super-sub').remove();
+      if (response.data.length > 0) {
         $('#kategori').append(html); //Add field html
-        $('#super_sub_kategori').remove()
-       }else{
-        $('#sub').remove();
-        $('#super-sub').remove();
-        $('#sub_kategori').remove()
-        $('#super_sub_kategori').remove()
-       }
-       // $('#crop-modal').addClass('bd-example-modal-lg');
-    },
-    error() {
-      console.log('error');
-    },
-  });
-}
-function selectSubCategory(){
-  var val = $('#barang_subkategori').val();
-  $.ajax({
-    url:base_url+'product/get-category/'+val,
-    method: "POST",
-    data: {kategori:val},
-    cache: false,
-    dataType: 'json',
-    success(response) {
-      var html = ``
-      var data = ``
-      var length = 0;
-      
-
-      for (var prop in response) {
-        var length = response[prop].length;
-        var res = response[prop];
-        for(var i=0; i < res.length; i++){
-          var row = res[i]
-          if(row != undefined){
-            data += `<option value="`+row.kategori_id+`">`+row.kategori_nama+`</option>`
-          }
-        }
-        
+      }else{
+        $('#data_kategori-'+dataV).nextAll().remove()
       }
-        html += `<div class="form-group row mb-4" id="super_sub_kategori">
-                <label for="barang_kategori" class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Super Sub Kategori Produk</label>
-                <div class="col-sm-12 col-md-7"> 
-                  <select name="barang_kategori[]" id="barang_kategori" class="form-control">
-                    <option value="">Pilih Super Sub Kategori</option>
-                    `+data+`
-                    </select>
-                  <?php echo error(form_error('barang_kategori')) ?>
-                </div>
-              </div>`
       
-
-     if(length > 0){
-      $('#kategori').append(html); //Add field html
-      // $('#sub').remove();
-      $('#super-sub').remove();
-      
-     }else{
-      // $('#sub').remove();
-      $('#super-sub').remove();
-      $('#super_sub_kategori').remove()
-     }
        // $('#crop-modal').addClass('bd-example-modal-lg');
     },
     error() {
