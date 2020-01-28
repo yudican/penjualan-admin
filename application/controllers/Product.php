@@ -27,8 +27,25 @@ class Product extends MY_Controller {
    */
   public function list()
   {
+    $dropdown_data = [
+      [
+        'link' => 'add-promo',
+        'icon' => 'fas fa-tags',
+        'label' => 'input promo'
+      ],
+      [
+        'link' => 'image-update',
+        'icon' => 'fas fa-images',
+        'label' => 'Update Gambar'
+      ],
+      [
+        'link' => 'edit',
+        'icon' => 'fas fa-edit',
+        'label' => 'Update Data'
+      ]
+    ];
     $column = 'barang_id,barang_nama,barang_kategori,barang_barcode,barang_stock,barang_detail';
-    echo $this->datatable($column,$this->colId,$this->table,'product'); //  
+    echo $this->datatable($column,$this->colId,$this->table,'product',$dropdown_data); //  
   }
 
   public function form()

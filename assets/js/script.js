@@ -159,6 +159,8 @@ $(document).on("click", "i.del" , function() {
 $(function() {
     $(document).on("change",".uploadFile", function()
     {
+        var imgId= $(this).data('id')
+        $('#img-'+imgId).html(`<input type="hidden" name="gambar_id[]" value="`+imgId+`" />`)
     		var uploadFile = $(this);
         var files = !!this.files ? this.files : [];
         if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support

@@ -7,16 +7,16 @@
       <a href="<?php echo site_url('product/add') ?>"><button class="btn btn-success">add new product</button></a>
     </div>
     <div class="card-body p-0">
-      <table class="table" id="tableList">
+      <table class="table" width="100%" id="tableList">
         <thead>
           <tr>
-            <th scope="col">#</th>
-            <th scope="col">Barcode</th>
-            <th scope="col">Nama Produk</th>
-            <th scope="col">Kategori</th>
-            <th scope="col">Stok</th>
-            <th scope="col">Deskripsi</th>
-            <th scope="col">Opsi</th>
+            <th scope="col" width="2%">#</th>
+            <th scope="col" width="5%">Barcode</th>
+            <th scope="col" width="15%">Nama Produk</th>
+            <th scope="col" width="5%">Kategori</th>
+            <th scope="col" width="5%">Stok</th>
+            <th scope="col" width="15%">Deskripsi</th>
+            <th scope="col" width="10%">Opsi</th>
           </tr>
         </thead>
         <tbody>

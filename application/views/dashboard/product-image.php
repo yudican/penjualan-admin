@@ -15,7 +15,7 @@ body {
   box-shadow: 0px -3px 6px 2px rgba(0, 0, 0, 0.2);
 }
 
-.btn-primary {
+.btn-primary, .btn-danger {
   display: block;
   border-radius: 0px;
   box-shadow: 0px 4px 6px 2px rgba(0, 0, 0, 0.2);
@@ -34,8 +34,10 @@ body {
   height: 30px;
   text-align: center;
   line-height: 30px;
-  background-color: rgba(255, 255, 255, 0.6);
+  background-color: rgb(255, 0, 0);
   cursor: pointer;
+  border-radius: 5px;
+  color: #fff;
 }
 
 .imgAdd {
@@ -68,18 +70,34 @@ body {
             <br>
             <div class="container">
               <div class="row">
-                <div class="col-sm-2 col-md-3 imgUp">
-                  <div class="imagePreview"></div>
-                  <label class="btn btn-primary">
-                    Pilih Gambar<input type="file" class="uploadFile img" name="product_image[]" value="Upload Photo"
-                      style="width: 0px;height: 0px;overflow: hidden;">
-                  </label>
-                </div><!-- col-2 -->
-                <i class="fa fa-plus imgAdd"></i>
+                <?php if($this->uri->segment(2) == 'image'){ ?>
+                  <div class="col-sm-2 col-md-3 imgUp">
+                    <div class="imagePreview"></div>
+                    <label class="btn btn-primary">
+                      Pilih Gambar<input type="file" class="uploadFile img" name="product_image[]" value="Upload Photo"
+                        style="width: 0px;height: 0px;overflow: hidden;">
+                    </label>
+                  </div><!-- col-2 -->
+                <?php }else{ ?>
+                  <?php foreach ($images->result_array() as $img) { ?>
+                    <div class="col-sm-2 col-md-3 imgUp">
+                      <div class="imagePreview" style="background: url('<?php echo base_url('upload/small/'.$img['gambar_nama']) ?>')" id="img-<?php echo $img['gambar_id'] ?>"></div>
+                      <label class="btn btn-primary">
+                        Pilih Gambar<input type="file" class="uploadFile img " data-id="<?php echo $img['gambar_id'] ?>" name="product_image[]" value="Upload Photo"
+                          style="width: 0px;height: 0px;overflow: hidden;">
+                          <i class="fa fa-times del"></i>
+                      </label>
+                    </div><!-- col-2 -->
+                  <?php } ?>
+                <?php } ?>
+              <i class="fa fa-plus imgAdd"></i>
               </div><!-- row -->
             </div><!-- container -->
             <div class="col-sm-12 col-md-12">
-              <button name="save" value="save" class="btn btn-primary float-right">Simpan Dan Lanjut</button>
+            <button name="save" value="save" class="btn btn-primary float-right"><i class="fas fa-check"></i> Simpan</button>
+              <?php if($this->uri->segment(2) == 'image-update'){ ?>
+                <a href="<?php echo site_url('product') ?>"><button name="save" value="save" class="btn btn-danger float-right mx-2"><i class="fas fa-times"></i> Batal</button></a>
+              <?php } ?>
             </div>
           </form>
         </div>

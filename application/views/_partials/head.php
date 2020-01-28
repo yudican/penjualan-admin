@@ -13,6 +13,7 @@
   <!-- Template CSS -->
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/style.css">
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/components.css">
+  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/modules/select2/dist/css/select2.min.css">
 
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/modules/izitoast/css/iziToast.min.css">
   <link rel="stylesheet" href="<?php echo base_url() ?>assets/css/dataTables.bootstrap4.css">
@@ -23,5 +24,11 @@
   <style>
     .invalid{
       border-color: red;
+    }
+    .select2-container--default .select2-selection--single .select2-selection__rendered {
+      color: #444;
+      /* line-height: 28px; */
+      padding-left: 15px;
+      padding-top: 7px;
     }
   </style>

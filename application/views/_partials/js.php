@@ -12,6 +12,7 @@
   <script src="<?php echo base_url(); ?>assets/js/jquery.dataTables.min.js"></script>
   <script src="<?php echo base_url(); ?>assets/js/dataTables.bootstrap4.js"></script>
   <script src="<?php echo base_url(); ?>assets/modules/sweetalert/sweetalert.min.js"></script>
+  <script src="<?php echo base_url(); ?>assets/modules/select2/dist/js/select2.full.min.js"></script>
 
 
   <script src="<?php echo base_url(); ?>assets/js/script.js"></script>
@@ -20,6 +21,9 @@
 
   <script>
     $(".inputtags").tagsinput('items');
+    if(jQuery().select2) {
+        $(".select2").select2();
+    }
   </script>
   <script>
     function hanyaAngka(e, decimal) {

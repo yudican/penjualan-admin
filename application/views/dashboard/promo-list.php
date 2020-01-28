@@ -4,14 +4,13 @@
   </div>
   <div class="card">
     <div class="card-header">
-      <a href="<?php echo site_url('promo/add') ?>"><button class="btn btn-success">add new promo</button></a>
+      <!-- <a href="<?php echo site_url('promo/add') ?>"><button class="btn btn-success">add new promo</button></a> -->
     </div>
     <div class="card-body p-0">
       <table class="table" id="tableList">
         <thead>
           <tr>
             <th scope="col">#</th>
-            <th scope="col">ID Barang</th>
             <th scope="col">Nama Barang</th>
             <th scope="col">Start Date</th>
             <th scope="col">End Date</th>
@@ -40,8 +39,7 @@
             },
            "columns": [
                { "data": "nomor",orderable:false,searchable:false },
-               { "data": "promo_barang", "name": "promo.promo_barang" },
-               { "data": "barang_nama", "name": "promo.barang_nama" },
+               { "data": "barang_nama", "name": "barang.barang_nama" },
                { "data": "promo_startdate", "name": "promo.promo_startdate" },
                { "data": "promo_enddate", "name": "promo.promo_enddate" },
                { "data": "promo_value", "name": "promo.promo_value" },

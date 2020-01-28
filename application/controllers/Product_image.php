@@ -7,11 +7,18 @@ class Product_image extends MY_Controller {
   public function index()
   {
     $id = $this->uri->segment(3);
+    $action = 'save';
+    if ($this->uri->segment(2) == 'image-update') {
+      $action = 'save-edit';
+    }
     $data = [
       'title' => 'Product Image Input',
       'isi' 	=> 'dashboard/product-image',
-      'action' => site_url('product-image/save/'.$this->uri->segment(3)),
+      'action' => site_url('product-image/'.$action.'/'.$this->uri->segment(3)),
     ];
+    if ($this->uri->segment(2) == 'image-update') {
+      $data['images'] = $this->get('gambar', 'gambar_barang_id', $this->uri->segment(3));
+    }
     $this->load->view('layout',$data);
   }
 
@@ -21,7 +28,12 @@ class Product_image extends MY_Controller {
     $id = $this->uri->segment(3);
     // If file upload form submitted
     if(!empty($_FILES['product_image']['name'])){
-        $filesCount = count($_FILES['product_image']['name']);
+        $filesCount = 0;
+        if ($this->uri->segment(2) == 'save-edit') {
+          $filesCount = count($this->input('gambar_id'));
+        }else{
+          $filesCount = count($_FILES['product_image']['name']);
+        }
         for($i = 0; $i < $filesCount; $i++){
             $_FILES['file']['name']     = $_FILES['product_image']['name'][$i];
             $_FILES['file']['type']     = $_FILES['product_image']['type'][$i];
@@ -43,30 +55,50 @@ class Product_image extends MY_Controller {
             // Upload file to server
             if($this->upload->do_upload('file')){
                 // Uploaded file data
-                $fileData = $this->upload->data();
-                $this->resize($fileData['file_name']);
-                $uploadData[$i]['gambar_barang_id'] = $id;
-                $uploadData[$i]['gambar_nama'] = $fileData['file_name'];
+                if ($this->uri->segment(2) == 'save-edit') {
+                  $img_id = $this->input('gambar_id');
+                  $fileData = $this->upload->data();
+                  $this->resize($fileData['file_name']);
+                  $uploadData[$i]['gambar_id'] = $img_id[$i];
+                  $uploadData[$i]['gambar_nama'] = $fileData['file_name'];
+
+                  $row[$i] = $this->get('gambar', 'gambar_id', $img_id[$i])->row_array();
+                  if(file_exists($small=FCPATH.'/upload/small/'.$row[$i]['gambar_nama'])){
+                    unlink($small);
+                  }
+                  if(file_exists($large=FCPATH.'/upload/large/'.$row[$i]['gambar_nama'])){
+                    unlink($large);
+                  }
+                  if(file_exists($original=FCPATH.'/upload/'.$row[$i]['gambar_nama'])){
+                    unlink($original);
+                  }
+                  // die;
+                }else{
+                  $fileData = $this->upload->data();
+                  $this->resize($fileData['file_name']);
+                  $uploadData[$i]['gambar_barang_id'] = $id;
+                  $uploadData[$i]['gambar_nama'] = $fileData['file_name'];
+                }
             }
         }
-        
-        if(!empty($uploadData)){
-            // Insert files data into the database
-            $insert = $this->db->insert_batch('gambar', $uploadData);
-            // Upload status message
-            $this->session->set_flashdata('success','gambar berhasil di input');
-            redirect(site_url('product'));
+        if ($this->uri->segment(2) == 'save-edit') {
+          $this->db->update_batch('gambar',$uploadData, 'gambar_id'); 
+          $this->session->set_flashdata('success','gambar berhasil di Update');
+          redirect(site_url('product'));
         }else{
-          $this->session->set_flashdata('error','gambar gagal di input');
-            redirect(site_url('product'));
+          if(!empty($uploadData)){
+              // Insert files data into the database
+              $insert = $this->db->insert_batch('gambar', $uploadData);
+              // Upload status message
+              $this->session->set_flashdata('success','gambar berhasil di input');
+              redirect(site_url('product'));
+          }else{
+            $this->session->set_flashdata('error','gambar gagal di input');
+              redirect(site_url('product'));
+          }
         }
     }
     
-    // Get files data from the database
-    $data['files'] = $this->file->getRows();
-    
-    // Pass the files data to view
-    $this->load->view('upload_files/index', $data);
   }
 
   function resize($file_name){
