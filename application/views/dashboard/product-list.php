@@ -16,7 +16,7 @@
             <th scope="col" width="5%">Kategori</th>
             <th scope="col" width="5%">Stok</th>
             <th scope="col" width="15%">Deskripsi</th>
-            <th scope="col" width="10%">Opsi</th>
+            <th scope="col" width="5%">Opsi</th>
           </tr>
         </thead>
         <tbody>

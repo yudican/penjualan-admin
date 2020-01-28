@@ -190,8 +190,10 @@ function selectCategory(){
     success(response) {
       var html = ``
       var data = ``
+      var length = 0;
       for (var prop in response) {
         var res = response[prop];
+        length = response[prop].length;
         for(var i=0; i < res.length; i++){
           var row = res[i]
           if(row != undefined){
@@ -199,7 +201,7 @@ function selectCategory(){
           }
         }
       }
-        html += `<div class="form-group row mb-4">
+        html += `<div class="form-group row mb-4" id="sub_kategori">
                 <label for="barang_kategori" class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Sub Kategori Produk</label>
                 <div class="col-sm-12 col-md-7"> 
                   <select name="barang_kategori[]" onchange="selectSubCategory();" id="barang_subkategori" class="form-control">
@@ -213,7 +215,18 @@ function selectCategory(){
               </div>`
       
 
-      $('#kategori').append(html); //Add field html
+      
+      if(length > 0){
+        $('#sub').remove();
+        $('#super-sub').remove();
+        $('#kategori').append(html); //Add field html
+        $('#super_sub_kategori').remove()
+       }else{
+        $('#sub').remove();
+        $('#super-sub').remove();
+        $('#sub_kategori').remove()
+        $('#super_sub_kategori').remove()
+       }
        // $('#crop-modal').addClass('bd-example-modal-lg');
     },
     error() {
@@ -233,7 +246,7 @@ function selectSubCategory(){
       var html = ``
       var data = ``
       var length = 0;
-     
+      
 
       for (var prop in response) {
         var length = response[prop].length;
@@ -260,7 +273,12 @@ function selectSubCategory(){
 
      if(length > 0){
       $('#kategori').append(html); //Add field html
+      // $('#sub').remove();
+      $('#super-sub').remove();
+      
      }else{
+      // $('#sub').remove();
+      $('#super-sub').remove();
       $('#super_sub_kategori').remove()
      }
        // $('#crop-modal').addClass('bd-example-modal-lg');

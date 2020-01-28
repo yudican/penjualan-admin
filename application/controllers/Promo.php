@@ -79,7 +79,8 @@ class Promo extends MY_Controller {
 
   public function list()
   {
-    $data = [
+    $id = $this->uri->segment(3);
+    $join = [
         [
           'tabel_fk' => 'barang',
           'fk' => 'promo_barang',
@@ -88,7 +89,7 @@ class Promo extends MY_Controller {
         ]
       ];
 
-    $this->join = $data;
+    $this->dt_join = $join;
     $column = 'promo.promo_id,barang.barang_nama,promo.promo_startdate,promo.promo_enddate,promo.promo_value';
     echo $this->datatable($column,'promo_id',$this->table,'promo');
   }

@@ -11,15 +11,16 @@
               <div class="form-group row mb-4">
                 <label for="barang_kategori" class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Kategori Produk</label>
                 <div class="col-sm-12 col-md-7"> 
-                  <select name="barang_kategori[]" onchange="selectCategory();" id="barang_kategori" <?php echo error_border(form_error('barang_kategori')) ?> class="form-control">
+                  <select name="barang_kategori[]" onchange="selectCategory();" id="barang_kategori" <?php echo error_border(form_error('barang_kategori')) ?> class="form-control select2">
                     <option value="">Pilih Kategori</option>";
                     <?php foreach ($kategori as $list) {
-                      echo "<option value=".$list['kategori_id']." ".set_select('barang_kategori',isset($row['barang_kategori']) ? $row['barang_kategori'] : '',($list['kategori_id'] == isset($row['barang_barcode']) ? $row['barang_barcode'] : '')).">".$list['kategori_nama']."</option>";
+                      echo "<option value=".$list['kategori_id']." ".set_select('barang_kategori',isset($row['barang_kategori']) ? $row['barang_kategori'] : '',$list['kategori_id'] == $row['barang_kategori']).">".$list['kategori_nama']."</option>";
                     } ?>
                   </select>
                   <?php echo error(form_error('barang_kategori')) ?>
                 </div>
               </div>
+              <?php echo $this->uri->segment(2) == 'edit' ? getCategoryTree($row['barang_kategori']) : null; ?>
             </div>
 
 

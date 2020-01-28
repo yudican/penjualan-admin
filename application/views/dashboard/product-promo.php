@@ -1,6 +1,6 @@
 <section class="section">
           <div class="section-header">
-            <h1>Input Promo</h1>
+            <h1><?php echo $this->uri->segment(2) == 'edit' ? 'Update' : 'Input'; ?> Promo</h1>
           </div>
           <div class="row">
               <div class="col-12">

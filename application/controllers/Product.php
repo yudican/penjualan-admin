@@ -58,7 +58,7 @@ class Product extends MY_Controller {
       $data = [
         'title' => 'Product List',
         'isi' 	=> 'dashboard/product-form',
-        'action' => site_url('product/'.$type),
+        'action' => site_url('product/'.$type.'/'.$this->uri->segment(3)),
         'kategori' => $this->db->get_where('kategori',['kategori_jenis' => null])->result_array(),
       ];
       if($id){
@@ -77,13 +77,13 @@ class Product extends MY_Controller {
         'barang_detail' => $this->input('barang_detail'),
       ];
       $insert_or_update = !$id ? $this->insert($this->table,$data,true) : $this->update($this->table,$this->colId,$data,$id);
-      !$id ? $this->save_category($kategori,$insert_or_update) : null;
+      $this->save_category($kategori, !$id ? $insert_or_update : $id);
       if($insert_or_update){
         $this->session->set_flashdata('success', 'Produk Berhasil Di '.$type);
         !$id ? redirect(site_url('product/variant/'.$insert_or_update)) : redirect(site_url('product'));
       }else{
         $this->session->set_flashdata('error', 'Produk Gagal Di '.$type);
-        redirect(site_url('product/add'));
+        redirect(site_url('product/'.$type.'/'.$this->uri->segment(3)));
       }
     }
   }
@@ -135,6 +135,7 @@ class Product extends MY_Controller {
         'id_kategori' => $val
       ];
     }
+    $this->delete('kategori_produk', 'id_produk', $id);
     return $this->db->insert_batch('kategori_produk', $data) ? true : false;
   }
 	

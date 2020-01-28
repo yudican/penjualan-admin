@@ -44,7 +44,7 @@ class Kategori extends MY_Controller {
     } else {
       $data = [
         'kategori_nama' => $this->input('kategori_nama'),
-        'kategori_jenis' => $this->input('kategori_jenis'),
+        'kategori_jenis' => $this->input('kategori_jenis') ? $this->input('kategori_jenis') : null,
       ];
 
       if($this->insert($this->table,$data)){
@@ -71,7 +71,7 @@ class Kategori extends MY_Controller {
     } else {
       $data = [
         'kategori_nama' => $this->input('kategori_nama'),
-        'kategori_jenis' => $this->input('kategori_jenis'),
+        'kategori_jenis' => $this->input('kategori_jenis') ? $this->input('kategori_jenis') : null,
       ];
 
       if($this->update($this->table,'kategori_id',$data,$id)){
