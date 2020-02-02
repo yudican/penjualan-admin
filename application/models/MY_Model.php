@@ -38,5 +38,5 @@ class MY_model extends CI_Model {
     $this->id = $colId;
     $this->db->delete($this->table, [$this->id => $id]);
     return $this->db->affected_rows();
-	}
+  }  
 }

@@ -14,6 +14,8 @@
         <ul class="dropdown-menu">
           <li><a class="nav-link" href="<?php echo site_url('kategori') ?>">List Kategori</a></li>
           <li><a class="nav-link" href="<?php echo site_url('product') ?>">List Produk</a></li>
+          <li><a class="nav-link" href="<?php echo site_url('product-in') ?>">Produk IN</a></li>
+          <li><a class="nav-link" href="<?php echo site_url('product-out') ?>">Produk Out</a></li>
           <li><a class="nav-link" href="<?php echo site_url('promo') ?>">List Promo</a></li>
         </ul>
       </li>
